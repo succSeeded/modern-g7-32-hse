@@ -46,6 +46,7 @@
 #let template(
   ministry: none,
   organization: (full: none, short: none),
+  faculty: none,
   udk: none,
   research-number: none,
   report-number: none,
@@ -56,9 +57,12 @@
   bare-subject: false,
   research: none,
   subject: none,
+  subject-ru: none,
+  field-of-study: none,
+  study-level: none,
+  study-programme: none,
   part: none,
   stage: none,
-  federal: none,
   manager: (position: none, name: none, title: none),
   performer: none,
 ) = {
@@ -67,6 +71,7 @@
     ministry,
     (value: upper(organization.full), when-present: organization.full),
     (value: upper[(#organization.short)], when-present: organization.short),
+    (value: upper(faculty), when-present: faculty),
   )
 
   per-line(
@@ -77,39 +82,39 @@
     (value: [Рег. № ИКРБС: #report-number], when-present: report-number),
   )
 
+  per-line(
+    force-indent: true,
+    (value: performer.at("fullname", default: performer.at("name")), when-present: performer)
+  )
+
   approved-and-agreed-fields(approved-by, agreed-by)
 
   per-line(
     align: center,
     indent: 2fr,
-    (value: upper(report-type), when-present: report-type),
     (value: upper(about), when-present: about),
     (value: research, when-present: research),
-    (value: [по теме:], when-rule: not bare-subject),
-    (value: upper(subject), when-present: subject),
+    (value: v(-1.5em), when-present: "always"),
+    (value: strong(underline(upper(subject-ru))), when-present: subject-ru),
+    (value: v(-1.5em), when-present: "always"),
+    (value: strong(underline(upper(subject))), when-present: subject),
+    (value: v(-1.5em), when-present: "always"),
+    (value: report-type, when-present: report-type),
+    (value: [field of study #underline(field-of-study)], when-present: field-of-study),
+    (value: [#study-level\'s Programme in #underline(study-programme)], when-present: (study-level, study-programme)),
     (
       value: [(#stage.type)],
       when-rule: (stage.type != none and stage.num == none),
     ),
     (
-      value: [(#stage.type, этап #stage.num)],
+      value: [(#stage.type, stage #stage.num)],
       when-present: (stage.type, stage.num),
     ),
-    (value: [\ Книга #part], when-present: part),
-    (federal),
+    (value: [\ Book #part], when-present: part),
   )
-
-  if manager.name != none {
-    let title = if type(manager.title) == str and manager.title != "" {
-      manager.title + linebreak()
-    } else {
-      none
-    }
-    sign-field(manager.at("name"), [#title #manager.at("position")])
-  }
-
+  
   if performer != none {
-    let title = if type(performer.title) == str and performer.title != "" {
+    let title = if type(performer.title) == str and manager.title != "" {
       performer.title + linebreak()
     } else {
       none
@@ -121,5 +126,13 @@
     )
   }
 
+  if manager.name != none {
+    let title = if type(manager.title) == str and manager.title != "" {
+      manager.title + linebreak()
+    } else {
+      none
+    }
+    sign-field(manager.at("name"), [#title #manager.at("position")])
+  }
   v(0.5fr)
 }

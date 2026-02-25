@@ -29,7 +29,7 @@
 
   set page(margin: margin)
 
-  set text(size: text-size, lang: "ru", hyphenate: false)
+  set text(size: text-size, lang: "en", hyphenate: false)
 
   set par(
     justify: default-justify,
@@ -41,7 +41,7 @@
     spacing: default-spacing,
   )
 
-  set outline(indent: indent, depth: default-outline-depth)
+  set outline(title: structural-heading-titles.contents, indent: indent, depth: default-outline-depth)
   show outline: set block(below: indent / 2)
   show outline.entry: it => {
     show linebreak: [ ]
@@ -49,7 +49,7 @@
       let body = it.element.body
       link(it.element.location(), it.indented(
         none,
-        [Приложение #it.prefix() #it.element.body]
+        [Appendix #it.prefix() #it.element.body]
           + sym.space
           + box(width: 1fr, it.fill)
           + sym.space
@@ -60,6 +60,8 @@
       it
     }
   }
+
+  set underline(offset: 3pt)
 
   set ref(supplement: none)
   set figure.caption(separator: " — ")

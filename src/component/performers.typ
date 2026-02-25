@@ -8,6 +8,7 @@
   let performers-args = (
     "name*",
     "position*",
+    "fullname",
     "co-performer",
     "part",
     "organization",
@@ -48,9 +49,9 @@
       performers-args,
       default: (
         co-performer: false,
-        title: "Исполнитель НИР,",
+        title: "Student,",
       ),
-      hint: "исполнителя",
+      hint: "student",
     )
     return (performer,)
   } else {
@@ -105,7 +106,7 @@
   ))
 
   if contains-co-performers {
-    block[Соисполнители:]
+    block[Coauthors:]
     group-organizations(co-performers)
   }
 }

@@ -1,4 +1,4 @@
-#import "headings.typ": structural-heading-titles
+#import "headings.typ": structural-heading-titles, structure-heading-style
 
 #let get-count(kind) = {
   assert(
@@ -41,7 +41,12 @@
   }
 }
 
-#let abstract(count: true, ..keywords, body) = {
+#let abstract(count: true, 
+  body,
+  body-ru,
+  keywords,
+  keywords-ru,
+) = {
   [
     #heading(structural-heading-titles.abstract, outlined: false) <abstract>
     #context if count {
@@ -53,14 +58,24 @@
         get-count("appendix"),
       )
       counts = counts.filter(it => it != none)
-      [Отчёт #counts.join(", ")]
+      [Отчет #counts.join(", ")]
     }
+
+    #text(body-ru)
 
     #{
       set par(first-line-indent: 0pt)
-      upper(keywords.pos().join(", "))
+      strong([Ключевые слова: ])
+      upper(keywords-ru.join(", "))
     }
 
+    #strong(structure-heading-style([Abstract]))
     #text(body)
+
+    #{
+      set par(first-line-indent: 0pt)
+      strong([Keywords: ])  
+      upper(keywords.join(", "))
+    }
   ]
 }

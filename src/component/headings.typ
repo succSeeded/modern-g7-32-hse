@@ -1,14 +1,14 @@
 #import "../constants.typ": default-heading-margin
 
 #let structural-heading-titles = (
-  performers: [Список исполнителей],
-  abstract: [Реферат],
-  contents: [Содержание],
-  terms: [Термины и определения],
-  abbreviations: [Перечень сокращений и обозначений],
-  intro: [Введение],
-  conclusion: [Заключение],
-  references: [Список использованных источников],
+  performers: [Authors],
+  abstract: [Аннотация],
+  contents: [Table of Contents],
+  terms: [Terms and Definitions],
+  abbreviations: [Abbreviations],
+  intro: [Introduction],
+  conclusion: [Conclusion],
+  references: [References],
 )
 
 #let structure-heading-style = it => {

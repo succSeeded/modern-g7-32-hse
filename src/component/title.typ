@@ -56,7 +56,7 @@
       )
       assert(
         not (data.when-rule != "always" and data.when-present != "always"),
-        message: "Должно быть выбрано только одно правило пояивления when-rule или when-present",
+        message: "Должно быть выбрано только одно правило появления when-rule или when-present",
       )
       if data.when-rule != "always" {
         rule = data.when-rule
@@ -101,7 +101,7 @@
 #let approved-field(approved-by) = {
   if approved-by.name != none [
     #detailed-sign-field(
-      "согласовано",
+      "approved",
       approved-by.name,
       approved-by.position,
       approved-by.year,
@@ -112,7 +112,7 @@
 #let agreed-field(agreed-by) = {
   if agreed-by.name != none [
     #detailed-sign-field(
-      "утверждаю",
+      "agreed",
       agreed-by.name,
       agreed-by.position,
       agreed-by.year,

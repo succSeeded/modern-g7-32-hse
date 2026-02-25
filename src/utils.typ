@@ -124,40 +124,38 @@
 
 #let get-numbering-alphabet(number) = {
   let alphabet = (
-    "а",
-    "б",
-    "в",
-    "г",
-    "д",
-    "е",
-    "ж",
-    "з",
-    "и",
-    "к",
-    "л",
-    "м",
-    "н",
-    "о",
-    "п",
-    "р",
-    "с",
-    "т",
-    "у",
-    "ф",
-    "х",
-    "ц",
-    "ч",
-    "ш",
-    "щ",
-    "э",
-    "ю",
-    "я",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
   )
   let result = ""
 
   while number > 0 {
-    result = alphabet.at(calc.rem(number - 1, 28)) + result
-    number = calc.floor(number / 28)
+    result = alphabet.at(calc.rem(number - 1, 25)) + result
+    number = calc.floor(number / 25)
   }
 
   return result
